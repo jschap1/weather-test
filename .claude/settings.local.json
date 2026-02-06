@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(export:*)",
+      "Bash([ -s \"$NVM_DIR/nvm.sh\" ])",
+      "Bash(. \"$NVM_DIR/nvm.sh\")",
+      "Bash(node --version:*)",
+      "Bash(npm:*)",
+      "Bash(curl:*)",
+      "Bash(sudo -n bash:*)",
+      "Bash(sudo -n apt-get install:*)",
+      "Bash(bash:*)",
+      "Bash(nvm install:*)",
+      "Bash(npx create-next-app@latest:*)",
+      "Bash(npx prisma db push:*)",
+      "Bash(npx dotenv:*)",
+      "Bash(DATABASE_URL=\"file:./dev.db\" npx prisma db push:*)",
+      "Bash(node -e:*)",
+      "WebSearch",
+      "WebFetch(domain:openweathermap.org)",
+      "Bash(DATABASE_URL=\"file:./dev.db\" npx prisma generate:*)",
+      "Bash(gh auth:*)",
+      "Bash(gh:*)",
+      "Bash(git --version:*)",
+      "Bash(conda install:*)",
+      "Bash(snap install:*)",
+      "Bash(apt list:*)",
+      "Bash(git init:*)",
+      "Bash(git branch:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}
