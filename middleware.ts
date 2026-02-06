@@ -1,7 +1,7 @@
-import { NextResponse } from "next/server";
-import { auth } from "@/lib/auth";
+import { NextRequest, NextResponse } from "next/server";
+import { getToken } from "next-auth/jwt";
 
-export default auth((request) => {
+export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl;
 
   // Allow auth API routes, registration API, and static assets
@@ -14,7 +14,14 @@ export default auth((request) => {
     return NextResponse.next();
   }
 
-  const isLoggedIn = !!request.auth;
+  const isSecure = request.nextUrl.protocol === "https:";
+  const token = await getToken({
+    req: request,
+    secret: process.env.NEXTAUTH_SECRET,
+    salt: isSecure ? "__Secure-authjs.session-token" : "authjs.session-token",
+    cookieName: isSecure ? "__Secure-authjs.session-token" : "authjs.session-token",
+  });
+  const isLoggedIn = !!token;
   const isOnLoginPage = pathname === "/login";
   const isOnRegisterPage = pathname === "/register";
 
@@ -29,7 +36,7 @@ export default auth((request) => {
   }
 
   return NextResponse.next();
-});
+}
 
 export const config = {
   matcher: ["/((?!_next/static|_next/image|favicon.ico).*)"],
